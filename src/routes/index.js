@@ -1,39 +1,39 @@
 const express = require('express');
 const router = express.Router();
 
-const Task = require('../models/task');
+const Location = require('../models/location');
 
 router.get('/', async (req,res) => {
-    const tasks = await Task.find();
+    const location = await Location.find();
    
     res.render('index',     {
-        tasks 
+        location 
     });
 });
 
 router.post('/add', async(req, res) => {
-    const task = new Task(req.body);
-    await   task.save();    
+    const location = new Location(req.body);
+    await   location.save();    
     res.redirect('/');
 });
 router.get('/turn/:id', async(req,res)=> {
     const {id} = req.params;
-    const task = await Task.findById(id);
-    task.status =!task.status;
-    await task.save();
+    const location = await Location.findById(id);
+    location.status =!location.status;
+    await location.save();
     res.redirect('/');
 });
 
 router.get('/edit/:id', async(req,res)=> {
     const {id} = req.params;
-    const task = await Task.findById(id);
+    const location = await Location.findById(id);
     res.render('edit', {
-        task
+        location
     });
 
 router.post('/edit/:id', async(req,res) =>{
     const {id} = req.params;
-    await Task.update({_id:id}, req.body);
+    await Location.update({_id:id}, req.body);
     res.redirect('/');
 })
     
@@ -41,7 +41,7 @@ router.post('/edit/:id', async(req,res) =>{
 
 router.get('/delete/:id', async(req,res)=> {
     const {id} = req.params;
-    await Task.remove({_id:id});
+    await Location.remove({_id:id});
     res.redirect('/');
 });
 

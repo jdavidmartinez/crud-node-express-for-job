@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
+const LocationSchema = new Schema({
     title: String,
     description: String,
     status: {
@@ -10,5 +10,5 @@ const TaskSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('tasks', TaskSchema);
+module.exports = mongoose.model('location', LocationSchema);
 
